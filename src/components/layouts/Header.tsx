@@ -1,8 +1,7 @@
-import React from 'react';
-
-import { Button } from '../../stories/Button';
-import './header.css';
+import { FC } from 'react';
 import logo from '/metlife_logo.svg';
+import account from '@assets/account.svg';
+import './header.css';
 
 type User = {
   name: string;
@@ -10,29 +9,15 @@ type User = {
 
 interface HeaderProps {
   user?: User;
-  onLogin?: () => void;
-  onLogout?: () => void;
-  onCreateAccount?: () => void;
 }
 
-export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
+export const Header: FC<HeaderProps> = ({ user }) => (
   <header>
     <div className='storybook-header'>
       <img src={logo} />
-      <div>
-        {user ? (
-          <>
-            <span className='welcome'>
-              Welcome, <b>{user.name}</b>!
-            </span>
-            <Button size='small' onClick={onLogout} label='Log out' />
-          </>
-        ) : (
-          <>
-            <Button size='small' onClick={onLogin} label='Log in' />
-            <Button primary size='small' onClick={onCreateAccount} label='Sign up' />
-          </>
-        )}
+      <div className='flex-col justify-center h-[30px]'>
+        <img src={account} />
+        <span className='text-[24px]'>{user?.name}</span>
       </div>
     </div>
   </header>
